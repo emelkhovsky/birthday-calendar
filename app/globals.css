@@ -56,7 +56,7 @@ button { font: inherit; }
 
 .calendar-sun {
   position: absolute;
-  bottom: 0;
+  bottom: -24px;
   left: 50%;
   width: clamp(56px, 4.6vw, 66px);
   aspect-ratio: 1;
@@ -331,7 +331,7 @@ button { font: inherit; }
 @media (max-width: 900px) {
   .site-shell { width: 100%; min-height: 100dvh; padding: 24px 18px; display: flex; align-items: center; justify-content: center; }
   .calendar-column { width: 100%; }
-  .calendar-sun { top: calc(100% + 14px); bottom: auto; width: 56px; }
+  .calendar-sun { position: fixed; top: auto; right: auto; bottom: 16px; width: 56px; }
   .month-header { height: clamp(96px, 13dvh, 110px); grid-template-columns: 42px minmax(0, 1fr) 42px; gap: 8px; }
   .month-header h1 { font-size: clamp(3.35rem, 15vw, 5.5rem); }
   .month-header button { width: 42px; height: 42px; }
