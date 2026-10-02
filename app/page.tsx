@@ -37,6 +37,9 @@ const birthdays: Birthday[] = [
   { id: 7, name: 'Лизочка', telegram: '@liiizzzzzzzz', currentAge: 23, day: 7, month: 8, photo: 'girls/lizochka.jpg', wishlists: ['https://followish.io/mywishlist/tq3eeq71yykbd0'] },
   { id: 8, name: 'Алёна', telegram: '@aalllennnaa', currentAge: 22, day: 12, month: 5, photo: 'girls/alyona.jpg', wishlists: [] },
   { id: 9, name: 'Ася', telegram: '@Saaveliy', currentAge: 26, day: 19, month: 4, photo: 'girls/asya.jpg', wishlists: [] },
+  { id: 10, name: 'Лизааа', telegram: '@little_sun_lion', currentAge: 25, day: 12, month: 7, photo: 'girls/lizaaa.jpg', wishlists: [], comment: 'Обычно делаю отдельно к каждому празднику' },
+  { id: 11, name: 'Карина', telegram: '@voiddess', currentAge: 24, day: 7, month: 9, photo: 'girls/karina.jpg', wishlists: ['https://followish.io/app/wishlists/ksgrae1luosqsw'] },
+  { id: 12, name: 'Яна', telegram: '@janekolt', currentAge: 26, day: 7, month: 3, photo: 'girls/yana.jpg', wishlists: [] },
 ];
 
 const monthNames = [
