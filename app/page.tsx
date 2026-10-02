@@ -213,6 +213,10 @@ export default function Home() {
             );
           })}
         </div>
+
+        <div className="calendar-sun" aria-hidden="true">
+          <Image src="/sun-mark.png" alt="" width={978} height={985} unoptimized />
+        </div>
       </div>
 
       <aside className="desktop-details">
