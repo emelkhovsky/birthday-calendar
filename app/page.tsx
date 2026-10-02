@@ -109,11 +109,17 @@ function PersonCard({ person, mobile = false, onClose }: { person: Birthday; mob
 }
 
 export default function Home() {
-  const [month, setMonth] = useState(1);
+  const [month, setMonth] = useState(9);
+  const [year, setYear] = useState(2026);
   const [selected, setSelected] = useState<Birthday | null>(null);
   const [sheetOpen, setSheetOpen] = useState(false);
-  const year = 2026;
-  const days = useMemo(() => getCalendarDays(year, month), [month]);
+  const days = useMemo(() => getCalendarDays(year, month), [month, year]);
+
+  useEffect(() => {
+    const today = new Date();
+    setMonth(today.getMonth());
+    setYear(today.getFullYear());
+  }, []);
 
   useEffect(() => {
     const closeOnEscape = (event: KeyboardEvent) => {
@@ -159,8 +165,9 @@ export default function Home() {
   };
 
   const goToMonth = (delta: number) => {
-    const nextMonth = (month + delta + 12) % 12;
-    setMonth(nextMonth);
+    const nextDate = new Date(year, month + delta, 1);
+    setMonth(nextDate.getMonth());
+    setYear(nextDate.getFullYear());
     setSelected(null);
     setSheetOpen(false);
   };
