@@ -1,0 +1,373 @@
+@import 'tailwindcss';
+
+@font-face {
+  font-family: 'Druk Cyr';
+  src: url('../public/DrukCyr-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --pink: #d77d9a;
+  --cream: #fff0bc;
+  --ink: #2f2930;
+  --grid: rgba(255, 240, 188, 0.82);
+  --card-ink: #7a2943;
+  --card-deep: #8d3652;
+  --card-cream: #fff0c6;
+  --card-rose: #d97f9b;
+}
+
+* { box-sizing: border-box; }
+html, body { min-height: 100%; }
+
+body {
+  margin: 0;
+  background: var(--pink);
+  color: var(--cream);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+button, a { -webkit-tap-highlight-color: transparent; }
+button { font: inherit; }
+
+.site-shell {
+  width: min(1440px, 100%);
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: clamp(24px, 4.3dvh, 44px) clamp(32px, 3.82vw, 55px) clamp(32px, 5dvh, 52px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: clamp(32px, 6.05vw, 87px);
+}
+
+.site-shell.card-closed {
+  grid-template-columns: minmax(0, 882px);
+  justify-content: center;
+}
+
+.site-shell.card-closed .desktop-details { display: none; }
+
+.calendar-column { min-width: 0; }
+
+.month-header {
+  height: clamp(170px, 22.27dvh, 228px);
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr) 52px;
+  align-items: center;
+  gap: 16px;
+}
+
+.month-header h1 {
+  margin: 0;
+  text-align: center;
+  font-family: 'Druk Cyr', Impact, sans-serif;
+  font-size: clamp(5rem, 9vw, 8.25rem);
+  line-height: 0.86;
+  font-weight: 500;
+  letter-spacing: 0.005em;
+}
+
+.month-header button {
+  width: 52px;
+  height: 52px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  color: var(--cream);
+  background: transparent;
+  border: 1px solid var(--grid);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 160ms ease, color 160ms ease, transform 160ms ease;
+}
+
+.month-header button:hover { background: var(--cream); color: var(--pink); }
+.month-header button:active { transform: scale(0.95); }
+.month-header button:focus-visible, .birthday-marker:focus-visible, .wishlist-button:focus-visible, .close-button:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  border-top: 1px solid var(--grid);
+  border-left: 1px solid var(--grid);
+}
+
+.weekday {
+  height: clamp(36px, 4.1dvh, 42px);
+  display: grid;
+  place-items: center;
+  border-right: 1px solid var(--grid);
+  border-bottom: 1px solid var(--grid);
+  font-family: 'Druk Cyr', Impact, sans-serif;
+  font-size: 1.65rem;
+  line-height: 1;
+}
+
+.day-cell {
+  position: relative;
+  height: clamp(68px, 9.375dvh, 96px);
+  border-right: 1px solid var(--grid);
+  border-bottom: 1px solid var(--grid);
+  overflow: visible;
+}
+
+.date-number {
+  position: absolute;
+  top: 10px;
+  left: 11px;
+  font-family: 'Druk Cyr', Impact, sans-serif;
+  font-size: 1.75rem;
+  letter-spacing: 0.015em;
+  line-height: 1;
+}
+
+.birthday-stack {
+  position: absolute;
+  right: 13px;
+  bottom: 12px;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.birthday-marker {
+  width: 54px;
+  height: 54px;
+  margin: 0;
+  padding: 5px;
+  display: grid;
+  place-items: center;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  transition: transform 160ms ease, border-color 160ms ease;
+}
+
+.birthday-marker img {
+  width: 40px;
+  height: 40px;
+  display: block;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.birthday-marker:hover { transform: translateY(-2px); }
+.birthday-marker.is-selected { border-color: var(--cream); }
+
+.desktop-details { padding-top: clamp(76px, 12.5dvh, 128px); }
+
+.person-card {
+  position: relative;
+  width: 100%;
+  height: clamp(560px, 70.3125dvh, 720px);
+  padding: 0;
+  background: var(--cream);
+  color: var(--card-ink);
+  border: 1px solid #fff7da;
+  border-radius: 32px;
+  overflow: hidden;
+}
+
+.person-topline {
+  position: absolute;
+  top: clamp(64px, 9.375dvh, 96px);
+  left: 32px;
+  right: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(16px, 2.34dvh, 24px);
+  text-align: center;
+}
+
+.avatar-face {
+  position: relative;
+  width: clamp(136px, 18.75dvh, 192px);
+  height: clamp(136px, 18.75dvh, 192px);
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-family: 'Druk Cyr', Impact, sans-serif;
+  overflow: hidden;
+}
+
+.avatar-face img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center; }
+
+.person-card h2 {
+  margin: 0;
+  font-family: 'Druk Cyr', Impact, sans-serif;
+  font-weight: 500;
+  font-size: clamp(52px, 7.03dvh, 72px);
+  line-height: 0.95;
+}
+
+.person-card h2.long-name { font-size: clamp(38px, 5.2dvh, 52px); line-height: 1; }
+
+.person-card a { color: inherit; }
+.person-topline a { color: var(--card-deep); font-size: 20px; font-weight: 700; text-underline-offset: 3px; }
+.identity-group { display: grid; gap: 5px; justify-items: center; }
+
+.card-bottom-content {
+  position: absolute;
+  bottom: 24px;
+  left: 32px;
+  right: 32px;
+  display: grid;
+  gap: 24px;
+}
+
+.card-copy {
+  display: grid;
+  gap: 12px;
+}
+
+.age-date-group {
+  display: grid;
+  gap: 8px;
+  text-align: center;
+}
+
+.age-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-family: Inter, Arial, sans-serif;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.age-line span, .age-line strong { font: inherit; }
+.age-date-group p { margin: 0; color: var(--card-deep); font-size: 18px; font-weight: 800; line-height: 1.2; }
+.card-sparkle { position: absolute; top: 59.44%; right: 32px; color: var(--card-rose); font-size: 24px; font-weight: 800; }
+
+.wishlist-area {
+  display: grid;
+  gap: 8px;
+}
+
+.person-comment {
+  margin: 0;
+  color: var(--card-deep);
+  font-size: 18px;
+  font-style: italic;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.wishlist-button {
+  height: clamp(48px, 5.47dvh, 56px);
+  padding: 0 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--card-cream) !important;
+  background: var(--pink);
+  border: 1px solid #8e2f4d;
+  border-radius: 28px;
+  text-decoration: none;
+  font-size: 17px;
+  font-weight: 800;
+  transition: transform 160ms ease, opacity 160ms ease;
+}
+
+.wishlist-button:hover { transform: translateY(-2px); opacity: 0.92; }
+.wishlist-empty {
+  height: clamp(48px, 5.47dvh, 56px);
+  margin: 0;
+  display: grid;
+  place-items: center;
+  color: var(--card-deep);
+  background: rgba(217, 127, 155, 0.1);
+  border: 1px solid var(--card-deep);
+  border-radius: 28px;
+  font-size: 17px;
+  font-weight: 700;
+}
+.empty-state { margin: 0; padding: 28px; background: var(--cream); color: var(--ink); line-height: 1.45; }
+.mobile-sheet-layer { display: none; }
+
+.close-button {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  color: var(--card-deep);
+  border: 0;
+  border-radius: 50%;
+  background: rgba(217, 127, 155, 0.14);
+  cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .site-shell { width: 100%; min-height: 100dvh; padding: 24px 18px; display: flex; align-items: center; justify-content: center; }
+  .calendar-column { width: 100%; }
+  .month-header { height: clamp(96px, 13dvh, 110px); grid-template-columns: 42px minmax(0, 1fr) 42px; gap: 8px; }
+  .month-header h1 { font-size: clamp(3.35rem, 15vw, 5.5rem); }
+  .month-header button { width: 42px; height: 42px; }
+  .month-header button svg { width: 20px; }
+  .weekday { height: clamp(24px, 3.32dvh, 28px); min-height: 0; font-size: 1.25rem; }
+  .day-cell { height: clamp(50px, 7.2dvh, 62px); min-height: 0; }
+  .date-number { top: 7px; left: 7px; font-size: 1.4rem; }
+  .birthday-stack { right: 4px; bottom: 4px; }
+  .birthday-marker { width: 34px; height: 34px; padding: 3px; border-width: 2px; }
+  .birthday-marker img { width: 24px; height: 24px; }
+  .desktop-details { display: none; }
+
+  .mobile-sheet-layer {
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .sheet-backdrop { position: absolute; inset: 0; border: 0; background: rgba(47, 41, 48, 0.35); cursor: pointer; }
+  .person-card-mobile { width: 100%; height: clamp(272px, 35.2dvh, 320px); padding: 0; z-index: 1; border-radius: 28px 28px 0 0; animation: sheet-in 220ms ease-out; }
+  .person-card-mobile.has-comment { height: clamp(340px, 43dvh, 380px); }
+  .sheet-handle { position: absolute; top: 14px; left: 50%; width: 64px; height: 5px; transform: translateX(-50%); border-radius: 3px; background: rgba(217, 127, 155, 0.5); }
+  .person-card-mobile .close-button { top: 18px; right: 20px; width: 32px; height: 32px; }
+  .person-card-mobile .close-button svg { width: 16px; height: 16px; }
+  .person-card-mobile .person-topline { top: clamp(40px, 5.69dvh, 48px); left: 20px; right: 20px; display: grid; grid-template-columns: clamp(88px, 12.32dvh, 104px) minmax(0, 1fr); gap: 12px; padding: 0; align-items: start; text-align: left; }
+  .person-card-mobile .avatar-face { width: clamp(88px, 12.32dvh, 104px); height: clamp(88px, 12.32dvh, 104px); font-size: clamp(2.25rem, 5.2dvh, 2.75rem); }
+  .person-card-mobile .identity-group { margin-top: 8px; gap: 4px; justify-items: start; }
+  .person-card-mobile h2 { font-size: clamp(46px, 6.16dvh, 52px); line-height: 0.95; }
+  .person-card-mobile h2.long-name { font-size: clamp(32px, 4.5dvh, 38px); line-height: 1; }
+  .person-card-mobile .person-topline a { font-size: 16px; font-weight: 600; }
+  .person-card-mobile .card-sparkle { top: clamp(44px, 6.16dvh, 52px); left: clamp(192px, 53.33vw, 208px); right: auto; font-size: 20px; }
+  .person-card-mobile .card-bottom-content { bottom: 17px; left: 20px; right: 20px; gap: 18px; }
+  .person-card-mobile .card-copy { gap: 8px; }
+  .person-card-mobile .age-date-group { gap: 6px; text-align: left; }
+  .person-card-mobile .age-line { justify-content: flex-start; font-size: 18px; }
+  .person-card-mobile .age-date-group p { font-size: 18px; }
+  .person-card-mobile .person-comment { font-size: 18px; line-height: 1.2; text-align: left; }
+  .person-card-mobile .wishlist-count-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .person-card-mobile .wishlist-button { height: 48px; margin: 0; padding-inline: 12px; border-radius: 24px; font-size: 16px; }
+  .person-card-mobile .wishlist-empty { height: 48px; border-radius: 24px; font-size: 16px; }
+}
+
+@media (max-width: 430px) {
+  .site-shell { padding-inline: 10px; }
+  .month-header { grid-template-columns: 38px minmax(0, 1fr) 38px; }
+  .month-header h1 { font-size: min(14.5vw, 4rem); }
+  .month-header button { width: 38px; height: 38px; }
+  .weekday { font-size: 1.05rem; }
+  .day-cell { height: clamp(50px, 7.2dvh, 62px); min-height: 0; }
+  .birthday-marker { width: 32px; height: 32px; padding: 2px; }
+  .birthday-marker img { width: 24px; height: 24px; }
+  .date-number { font-size: 1.22rem; }
+}
+
+@keyframes sheet-in { from { transform: translateY(100%); } to { transform: translateY(0); } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
